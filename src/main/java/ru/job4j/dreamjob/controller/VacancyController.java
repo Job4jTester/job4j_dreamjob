@@ -16,16 +16,10 @@ public class VacancyController {
         this.vacancyRepository = vacancyRepository;
     }
 
-    /**
-     * Возвращает страницу со списком вакансий
-     *
-     * @param model заполняемая модель
-     * @return страница
-     */
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("vacancies", vacancyRepository.findAll());
-        return "posts/list";
+        return "vacancies/list";
     }
 
 }

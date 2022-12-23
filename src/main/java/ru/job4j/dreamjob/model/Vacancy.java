@@ -2,19 +2,10 @@ package ru.job4j.dreamjob.model;
 
 import java.util.Objects;
 
-/**
- * Модель данных вакансии
- */
 public class Vacancy {
 
-    /**
-     * Идентификатор
-     */
     private int id;
 
-    /**
-     * Название
-     */
     private String title;
 
     public Vacancy(int id, String title) {
