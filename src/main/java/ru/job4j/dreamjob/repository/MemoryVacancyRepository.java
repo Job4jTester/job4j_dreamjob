@@ -17,12 +17,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
     public MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "Стажер Java разработчик", LocalDateTime.now()));
-        save(new Vacancy(0, "Junior Java Developer", "Младший Java разработчик", LocalDateTime.now()));
-        save(new Vacancy(0, "Junior+ Java Developer", "Java разработчик", LocalDateTime.now()));
-        save(new Vacancy(0, "Middle Java Developer", "Старший Java разработчик", LocalDateTime.now()));
-        save(new Vacancy(0, "Middle+ Java Developer", "Ведущий Java разработчик", LocalDateTime.now()));
-        save(new Vacancy(0, "Senior Java Developer", "Главный Java разработчик", LocalDateTime.now()));
+        save(new Vacancy(0, "Intern Java Developer", "Стажер Java разработчик", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Junior Java Developer", "Младший Java разработчик", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Junior+ Java Developer", "Java разработчик", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Middle Java Developer", "Старший Java разработчик", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Middle+ Java Developer", "Ведущий Java разработчик", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Senior Java Developer", "Главный Java разработчик", LocalDateTime.now(), true));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
     @Override
     public synchronized boolean update(Vacancy vacancy) {
         return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> {
-            return new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate());
+            return new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate(), vacancy.getVisible());
         }) != null;
     }
 
