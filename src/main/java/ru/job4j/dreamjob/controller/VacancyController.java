@@ -7,10 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.dreamjob.dto.FileDto;
 import ru.job4j.dreamjob.model.Vacancy;
 import ru.job4j.dreamjob.service.CityService;
-import ru.job4j.dreamjob.service.FileService;
 import ru.job4j.dreamjob.service.VacancyService;
-
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/vacancies")
@@ -20,7 +17,7 @@ public class VacancyController {
 
     private final CityService cityService;
 
-    public VacancyController(VacancyService vacancyService, CityService cityService, FileService fileService) {
+    public VacancyController(VacancyService vacancyService, CityService cityService) {
         this.vacancyService = vacancyService;
         this.cityService = cityService;
     }
@@ -42,7 +39,7 @@ public class VacancyController {
         try {
             vacancyService.save(vacancy, new FileDto(file.getOriginalFilename(), file.getBytes()));
             return "redirect:/vacancies";
-        } catch (IOException exception) {
+        } catch (Exception exception) {
             model.addAttribute("message", exception.getMessage());
             return "errors/404";
         }
@@ -69,8 +66,9 @@ public class VacancyController {
                 return "errors/404";
             }
             return "redirect:/vacancies";
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception exception) {
+            model.addAttribute("message", exception.getMessage());
+            return "errors/404";
         }
     }
 
